@@ -3,9 +3,11 @@ const fs = require('fs');
 const path = require('path');
 
 // Function to perform the GET request and save the response
-async function fetchAndSaveMapTile() {
-    const url = "https://forward.qldglobe.information.qld.gov.au/proxy.php?https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Basemaps/QldMap_Topo/MapServer/tile/6/34/56?blankTile=false&browserCache=Map";
-    
+async function fetchQGTile(basemap, z, x, y) {
+    const proxy = "https://forward.qldglobe.information.qld.gov.au/proxy.php?";
+    const map = `https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Basemaps/${basemap}/MapServer/tile/${z}/${x}/${y}?blankTile=false&browserCache=Map`;
+    const url = proxy + map;
+
     try {
         const response = await axios.get(url, {
             headers: {
@@ -28,4 +30,4 @@ async function fetchAndSaveMapTile() {
 }
 
 // Call the function
-fetchAndSaveMapTile();
+fetchQGTile("QldMap_Topo", "6", "34", "56");
