@@ -2,6 +2,10 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
+
+// QldGlobe is using a proxy, probably this one:
+// https://github.com/Esri/resource-proxy/blob/master/PHP/proxy.php
+
 // Function to perform the GET request and save the response
 async function fetchQGTile(basemap, z, x, y) {
     const proxy = "https://forward.qldglobe.information.qld.gov.au/proxy.php?";
@@ -31,3 +35,4 @@ async function fetchQGTile(basemap, z, x, y) {
 
 // Call the function
 fetchQGTile("QldMap_Topo", "6", "34", "56");
+fetchQGTile("QldMap_Topo", 11, 1136, 1860) // 11/1136/1860
